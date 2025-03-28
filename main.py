@@ -1,3 +1,4 @@
+import os
 import flet as ft
 from database import ExerciseDatabase
 from datetime import datetime
@@ -109,5 +110,3 @@ def main(page: ft.Page):
 
 if __name__ == "__main__":
     ft.app(target=main)
-
-ft.app(target=main, view=ft.AppView.WEB_BROWSER, port=int(os.environ.get("PORT", 8000)))
