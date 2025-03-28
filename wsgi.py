@@ -1,4 +1,7 @@
-from main import main
 import flet as ft
+from main import main
 
-app = ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+def create_app():
+    return ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+
+app = create_app()
