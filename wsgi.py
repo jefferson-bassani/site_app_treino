@@ -1,19 +1,16 @@
-import flet
-from flet import Page, app
+import flet as ft
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from main import main
 
 app = FastAPI()
 
 @app.get("/")
 async def root():
-    try:
-        page = Page()
-        await main(page)
-        return HTMLResponse(page.render())
-    except Exception as e:
-        return HTMLResponse(f"<h1>Error: {str(e)}</h1>")
+    def main(page: ft.Page):
+        page.title = "Contador de Exercícios"
+        page.update()
+    
+    return ft.app(target=main, view=ft.AppView.WEB_BROWSER)
 
 @app.get("/assets/{path:path}")
 async def serve_assets(path: str):
