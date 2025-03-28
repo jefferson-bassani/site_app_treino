@@ -107,8 +107,7 @@ def main(page: ft.Page):
         tracker.create_history_table(),
     )
 
-# No final do arquivo, substitua:
-ft.app(target=main)
+if __name__ == "__main__":
+    ft.app(target=main)
 
-# Por:
 ft.app(target=main, view=ft.AppView.WEB_BROWSER, port=int(os.environ.get("PORT", 8000)))
