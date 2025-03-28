@@ -1,1 +1,1 @@
-web: uvicorn wsgi:app --host 0.0.0.0 --port $PORT --workers 1
+web: uvicorn wsgi:app --host=0.0.0.0 --port=$PORT --timeout-keep-alive=300
