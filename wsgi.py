@@ -1,17 +1,18 @@
+from flask import Flask, Response
 import flet as ft
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from main import main
 
-app = FastAPI()
+app = Flask(__name__)
 
-@app.get("/")
-async def root():
-    def main(page: ft.Page):
-        page.title = "Contador de Exercícios"
-        page.update()
-    
-    return ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+@app.route("/")
+def home():
+    return Response(
+        ft.app(
+            target=main,
+            view=ft.AppView.WEB_BROWSER,
+            assets_dir="assets"
+        )
+    )
 
-@app.get("/assets/{path:path}")
-async def serve_assets(path: str):
-    return flet.app_assets(path)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
