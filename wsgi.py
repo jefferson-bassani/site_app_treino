@@ -1,14 +1,23 @@
 import os
-from flask import Flask, Response
+from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
 import flet as ft
 from main import main
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route('/')
-def home():
-    return Response(ft.app(target=main, view=ft.AppView.WEB_BROWSER))
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    app.run(host='0.0.0.0', port=port)
+@app.get("/")
+async def home():
+    return await ft.app(
+        target=main,
+        view=ft.AppView.WEB_BROWSER,
+        port=int(os.environ.get("PORT", 8000))
+    )
