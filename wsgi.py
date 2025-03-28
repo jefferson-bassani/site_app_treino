@@ -1,14 +1,12 @@
-from flask import Flask
+from flask import Flask, Response
 import flet as ft
 from main import main
 
-server = Flask(__name__)
+app = Flask(__name__)
 
-@server.route("/")
-def serve_flet_app():
-    return ft.app(target=main, view=ft.AppView.WEB_BROWSER)
-
-app = server
+@app.route('/')
+def home():
+    return Response(ft.app(target=main, view=ft.AppView.WEB_BROWSER))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=10000)
