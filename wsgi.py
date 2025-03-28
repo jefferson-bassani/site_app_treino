@@ -10,9 +10,9 @@ def home():
         ft.app(
             target=main,
             view=ft.AppView.WEB_BROWSER,
-            assets_dir="assets"
+            port=8000
         )
     )
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run()
