@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import flet as ft
 from main import main
@@ -16,8 +16,10 @@ app.add_middleware(
 
 @app.get("/")
 async def home():
-    return await ft.app(
+    page = await ft.app(
         target=main,
         view=ft.AppView.WEB_BROWSER,
-        port=int(os.environ.get("PORT", 8000))
+        port=int(os.environ.get("PORT", 8000)),
+        web_renderer="html"  # Added this line
     )
+    return page
